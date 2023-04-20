@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="content">
+   <div class="title">Registration</div>
+
+      <form [formGroup]="regForm" class="form" (ngSubmit)="submit()">
+      <div class="user-details">
+        <div class="input-box">  
+          <span class="details">Full Name</span>
+          <input type="text" formControlName = "fullName" placeholder="Enter your name">
+     <div class="danger" *ngIf="regForm.get('fullName')?.touched&& regForm.get('fullName')?.invalid">
+      <div *ngIf="regForm.get('fullName')?.errors"></div>
+      <p style="color: red;"> Name is required </p>
+     </div>
+        </div>
+        
+        <div class="input-box">
+          <span class="details">Username</span>
+          <input type="text" formControlName = "userName" placeholder="Enter your username">
+          <div class="danger" *ngIf="regForm.get('userName')?.touched&& regForm.get('userName')?.invalid">
+            <div *ngIf="regForm.get('userName')?.errors"></div>
+            <p style="color: red;"> UserName is required </p>
+           </div>
+        </div>
+
+        <div class="input-box">
+          <span class="details">E-mail ID</span>
+          <input type="email" formControlName = "email" placeholder="Enter your email">
+          <div class="danger" *ngIf="regForm.get('email')?.touched&& regForm.get('email')?.invalid">
+            <div *ngIf="regForm.get('email')?.errors"></div>
+            <p style="color: red;"> Email is required </p>
+           </div>
+        </div>
+
+        <div class="input-box">
+          <span class="details">Phone Number</span>
+          <input type="text" formControlName = "phoneNumber" placeholder="Enter your number">
+          <div class="danger" *ngIf="regForm.get('phoneNumber')?.touched&& regForm.get('phoneNumber')?.invalid">
+            <div *ngIf="regForm.get('phoneNumber')?.errors"></div>
+            <p style="color: red;"> Phone number is required </p>
+           </div>
+        </div>
+
+        <div class="input-box">
+          <span class="details" >Password</span>
+          <input type="text" formControlName = "password" placeholder="Enter your password">
+          <div class="danger" *ngIf="regForm.get('password')?.touched&& regForm.get('password')?.invalid">
+            <div *ngIf="regForm.get('password')?.errors"></div>
+            <p style="color: red;"> Password is required </p>
+           </div>
+        </div>
+
+        <div class="input-box">
+          <span class="details">Confirm Password</span>
+          <input type="text" formControlName = "confirmPassword" placeholder="Confirm your password">
+          <div class="danger" *ngIf="regForm.get('confirmPassword')?.touched&& regForm.get('confirmPassword')?.invalid">
+            <div *ngIf="regForm.get('confirmPassword')?.errors"></div>
+            <p style="color: red;"> Please conform your Password </p>
+           </div>
+        </div>
+      </div>
+
+      <div class="gender-details">
+        <input type="radio" name="gender" id="dot-1">
+        <input type="radio" name="gender" id="dot-2">
+        <input type="radio" name="gender" id="dot-3">
+        <span class="gender-title">Gender</span>
+        <div class="category">
+          <label for="dot-1">
+          <span class="dot one"></span>
+          <span class="gender">Male</span>
+        </label>
+        <label for="dot-2">
+          <span class="dot two"></span>
+          <span class="gender">Female</span>
+        </label>
+        <label for="dot-3">
+          <span class="dot three"></span>
+          <span class="gender">Prefer not to say</span>
+          </label>
+        </div>
+      </div>
+
+
+      <div class="button">
+        <input type="submit" value="Register">
+      </div>
+
+
+    </form>
+  </div>
+</div>
