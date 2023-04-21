@@ -54,6 +54,10 @@ constructor(private fb : FormBuilder){
     this.submitted = true
   }
 
+ reset(){
+  this.regForm.value.reset
+ }
+ 
 }
 function ngOnInit() {
   throw new Error('Function not implemented.');
