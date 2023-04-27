@@ -1,0 +1,71 @@
+<div class="mainscreen">
+    <div class="formgroups row">
+      <form [formGroup]="dataform" class="formGroup">
+        <h2 class="d-flex">Welcome User !</h2>
+        <div class="d-flex">
+          <label for="name">Enter User Name :</label>
+          <input type="text" formControlName="name" id="name">
+          <div
+            *ngIf="dataform.controls?.['name']?.invalid && (dataform.controls?.['name']?.dirty || dataform.controls?.['name']?.touched)">
+            <span class="errmsg" *ngIf="dataform.controls?.['name']?.errors?.['required'] ">Please Enter the
+              username</span>
+            <span class="errmsg" *ngIf="dataform.controls?.['name']?.errors?.['pattern'] ">Enter only numbers and
+              Alphabets</span>
+          </div>
+        </div>
+        <div class="d-flex"><label for="email">Enter User Email :</label>
+          <input type="email" formControlName="email" id="email">
+          <div
+            *ngIf="dataform.controls?.['email']?.invalid && (dataform.controls?.['email']?.dirty || dataform.controls?.['email']?.touched)">
+            <span class="errmsg" *ngIf="dataform.controls?.['email']?.errors?.['required'] ">Please Enter the
+              useremail</span>
+            <span class="errmsg" *ngIf="dataform.controls?.['email']?.errors?.['email'] ">Enter Valid Email Address</span>
+          </div>
+        </div>
+        <div class="d-flex"><label for="number">Enter Mobile number :</label>
+          <input type="text" formControlName="number" id="number">
+          <div
+            *ngIf="dataform.controls?.['number']?.invalid && (dataform.controls?.['number']?.dirty || dataform.controls?.['number']?.touched)">
+            <span class="errmsg" *ngIf="dataform.controls?.['number']?.errors?.['required'] ">Please Enter the
+              user number</span>
+            <span class="errmsg" *ngIf="dataform.controls?.['number']?.errors?.['pattern'] ">Enter only numbers - </span>
+            <span class="errmsg" *ngIf="dataform.controls?.['number']?.errors?.['minlength'] ">Enter Minimum of 10 Digits
+            </span>
+            <span class="errmsg" *ngIf="dataform.controls?.['number']?.errors?.['maxlength'] ">Enter Maximum of 10
+              Digits</span>
+          </div>
+        </div>
+        <div class="d-flex" *ngIf="!isEdit"><label for="number">Enter Password :</label>
+            <input type="text" formControlName="password"  id="password">
+        </div>
+        <div class="d-flex" *ngIf="!isEdit"><label for="confirmpassword">Retype Password :</label>
+            <input type="text" formControlName="confirmpassword" id="confirmpassword">
+                <span class="errmsg" *ngIf="dataform?.hasError('notsame')">password mismatch</span>
+        </div>
+        <div class="d-flex">
+          <button type="submit" [disabled]="dataform.invalid" (click)="!isEdit ? saveFormData() : updateForm()">{{!isEdit ? 'Save' : 'Update'}}</button>
+          <button type="button" (click)="clear()">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div class="listable row">
+      <table>
+        <thead>
+          <th [colSpan]="3">SL NO</th>
+          <th [colSpan]="3">NAME</th>
+          <th [colSpan]="3">EMAIL</th>
+          <th [colSpan]="3">PHONE NUMBER</th>
+          <th [colSpan]="3">ACTIONS</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of datalist,let i = index">
+            <td [colSpan]="3" >{{i}}</td>
+            <td [colSpan]="3">{{data.name}}</td>
+            <td [colSpan]="3">{{data.email}}</td>
+            <td [colSpan]="3">{{data.number}}</td>
+            <td [colSpan]="3"><button (click)="editForm(data)">EDIT</button><button (click)="deleteForm(i)">DELETE</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

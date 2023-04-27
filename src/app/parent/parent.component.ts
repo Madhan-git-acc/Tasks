@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { DataformService } from './dataform.service';
+import { DataformService } from '../dataform.service';
+import { Router } from '@angular/router';
+import { ChildService } from '../child/child.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-parent',
+  templateUrl: './parent.component.html',
+  styleUrls: ['./parent.component.scss']
 })
-export class AppComponent implements OnInit {
+export class ParentComponent {
   public dataform!: FormGroup
   public datalist:any[]=[]
   public isEdit:boolean=false
   public indexValue!:number
-  constructor(public fb: FormBuilder,public Dataformservice:DataformService) {
+  constructor(public fb: FormBuilder,public Dataformservice:DataformService, public router:Router,public Childservice:ChildService) {
     this.dataform = this.fb.group({
       name: new FormControl('', [Validators.required,Validators.pattern('[a-zA-Z0-9]*')]),
       email: new FormControl('', [Validators.email, Validators.required]),
-      number: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10),Validators.pattern('[0-9]*')])
-    })
+      number: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10),Validators.pattern('[0-9]*')]),
+      password: new FormControl('',Validators.required),
+      confirmpassword: new FormControl('',Validators.required)
+    },{validator : this.matchpass})
   }
   ngOnInit() {
     this.datalist=this.Dataformservice.data
@@ -31,6 +35,8 @@ export class AppComponent implements OnInit {
   editForm(index:any){
     this.isEdit=true
     this.indexValue=index
+    this.dataform.controls?.['password'].disable()
+    this.dataform.controls?.['confirmpassword'].disable()
     console.log(index)
     this.dataform.patchValue({
     name:index.name,
@@ -49,5 +55,13 @@ export class AppComponent implements OnInit {
     console.log(index)
     this.datalist.splice(index,1)
     this.datalist=this.datalist
+  }
+  matchpass(g:FormGroup){
+    let pass1=g.controls?.['password']?.value
+    let pass2=g.controls?.['confirmpassword']?.value
+    return pass1 == pass2 ? null : {'notsame':true}
+  }
+  clear(){
+    this.dataform.reset()
   }
 }

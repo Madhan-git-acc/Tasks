@@ -1,0 +1,31 @@
+.mainscreen{
+    background: fixed;
+    background-color: rgb(219, 255, 127);
+}
+.formgroups {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+    border: 5px solid rgb(233, 229, 229);
+}
+
+.errmsg {
+    color: red;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+td {
+    text-align: center;
+}
+
+.listable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+}
